@@ -12,6 +12,11 @@ RegisterCommand('dealer', function(source, args, rawcommand)
     }
     for k, v in pairs(Config.drugs) do
         item = xPlayer.getInventoryItem(k)
+            
+        if item == nil then
+            return        
+        end
+            
         count = item.count
         drugToSell.i = drugToSell.i + 1
         drugToSell.type = k
