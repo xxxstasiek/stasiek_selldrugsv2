@@ -23,6 +23,12 @@ Citizen.CreateThread(function()
 		end)
 	end
 
+	ESX.PlayAnimOnPed = function(ped, dict, anim, speed, time, flag)
+		ESX.Streaming.RequestAnimDict(dict, function()
+			TaskPlayAnim(ped, dict, anim, speed, speed, time, flag, 1, false, false, false)
+		end)
+	end
+
 	ESX.Game.MakeEntityFaceEntity = function(entity1, entity2)
 		local p1 = GetEntityCoords(entity1, true)
 		local p2 = GetEntityCoords(entity2, true)
@@ -38,14 +44,14 @@ end)
 next_ped = function(drugToSell)
 
 	if cooldown then
-		ESX.ShowAdvancedNotification('Dragi', '', '~r~Poczekaj chwilę aby nie robić przypału', 'DIA_CLIFFORD', 1)
+		ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.cooldown, 'DIA_CLIFFORD', 1)
 		return
 	end
 
 	cooldown = true
 
 	if Config.cityPoint ~= false and GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), Config.cityPoint, true) > 1500.0 then
-		ESX.ShowAdvancedNotification('Dragi', '', '~r~Zbyt daleko miasta, nie znajdziesz tutaj klientów', 'DIA_CLIFFORD', 1)
+		ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.toofar, 'DIA_CLIFFORD', 1)
 		return
 	end
 
@@ -61,7 +67,7 @@ next_ped = function(drugToSell)
 	Wait(500)
 
 	if cops < Config.requiredCops then
-		ESX.ShowAdvancedNotification('Dragi', '', '~r~W mieście jest za mało policjantów, nikt nic od ciebie nie kupi', 'DIA_CLIFFORD', 1)
+		ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.cops, 'DIA_CLIFFORD', 1)
 		return
 	end
 
@@ -77,8 +83,8 @@ next_ped = function(drugToSell)
 		drugToSell.price = ESX.Math.Round(drugToSell.price * 1.30)
 	end
 
-	TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)
-	ESX.ShowAdvancedNotification('Dragi', '', 'Poszukiwanie klientów na ~g~' .. drugToSell.label, 'DIA_CLIFFORD', 1)
+	--TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)
+	ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.searching .. drugToSell.label, 'DIA_CLIFFORD', 1)
 	Wait(math.random(5000, 10000))
 	ESX.PlayAnim('amb@world_human_drug_dealer_hard@male@base', 'base', 8.0, -1, 1)
 
@@ -89,7 +95,7 @@ next_ped = function(drugToSell)
 
 	if retval == false then
 		cooldown = false
-		ESX.ShowAdvancedNotification('Dragi', '', '~r~Klient zrezygnował z zamówienia', 'DIA_CLIFFORD', 1)
+		ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.abort, 'DIA_CLIFFORD', 1)
 		ClearPedTasks(PlayerPedId())
 		return
 	end
@@ -101,11 +107,11 @@ next_ped = function(drugToSell)
 	SetEntityAsMissionEntity(npc.ped)
 	
 	if IsEntityDead(npc.ped) or GetEntityCoords(npc.ped) == vector3(0.0, 0.0, 0.0) then
-		ESX.ShowAdvancedNotification('Dragi', '', '~r~Nie znaleziono klientów', 'DIA_CLIFFORD', 1)
+		ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.notfound, 'DIA_CLIFFORD', 1)
         return
 	end
 	
-	ESX.ShowAdvancedNotification('Dragi', 'Klient zbliża się', '~g~Znaleziono klienta na ~y~' .. npc.zone, 'DIA_CLIFFORD', 1)
+	ESX.ShowAdvancedNotification(Config.notify.title, Config.notify.approach, Config.notify.found .. npc.zone, 'DIA_CLIFFORD', 1)
 	TaskGoToEntity(npc.ped, PlayerPedId(), 60000, 4.0, 2.0, 0, 0)
 
 	CreateThread(function()
@@ -117,13 +123,13 @@ next_ped = function(drugToSell)
 			distance = Vdist2(GetEntityCoords(PlayerPedId()), npc.coords)
 			
 			if distance < 2.0 then
-				ESX.ShowHelpNotification('Naciśnij ~INPUT_PICKUP~ aby ~y~sprzedać narkotyki')
+				ESX.ShowHelpNotification(Config.notify.press)
 				if IsControlJustPressed(0, 38) and canSell then
 					canSell = false
 					reject = math.random(1, 10)
 
 					if reject <= 3 then
-						ESX.ShowAdvancedNotification('Dragi', '', '~r~Co to za gówno!? Oczekiwałem dobrego towaru', 'DIA_CLIFFORD', 1)
+						ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.reject, 'DIA_CLIFFORD', 1)
 						PlayAmbientSpeech1(npc.ped, 'GENERIC_HI', 'SPEECH_PARAMS_STANDARD')
 						drugToSell.coords = GetEntityCoords(PlayerPedId())
 						TriggerServerEvent('stasiek_selldrugsv2:notifycops', drugToSell)
@@ -136,7 +142,7 @@ next_ped = function(drugToSell)
 					end
 
 					if IsPedInAnyVehicle(PlayerPedId(), false) then
-						ESX.ShowAdvancedNotification('Dragi', '~r~Musisz wyjść z pojazdu', '', 'DIA_CLIFFORD', 1)
+						ESX.ShowAdvancedNotification(Config.notify.title, Config.notify.vehicle, '', 'DIA_CLIFFORD', 1)
 						return
 					end
 
@@ -159,7 +165,7 @@ next_ped = function(drugToSell)
 					PlayAmbientSpeech1(npc.ped, 'GENERIC_THANKS', 'SPEECH_PARAMS_STANDARD')
 					SetPedAsNoLongerNeeded(npc.ped)
 					TriggerServerEvent('stasiek_selldrugsv2:pay', drugToSell)
-					ESX.ShowAdvancedNotification('Dragi', '', '~g~Sprzedałeś ~y~x' .. drugToSell.count .. ' ' .. drugToSell.label .. ' ~g~za ' .. drugToSell.price .. '$', 'DIA_CLIFFORD', 1)
+					ESX.ShowAdvancedNotification(Config.notify.title, '', (Config.notify.sold):format(drugToSell.count, drugToSell.label, drugToSell.price), 'DIA_CLIFFORD', 1)
 					npc = {}
 				end
 			end
@@ -184,7 +190,7 @@ AddEventHandler('stasiek_selldrugsv2:notifyPolice', function(coords)
 	if PlayerData.job ~= nil and PlayerData.job.name == 'police' then
 		street = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
 		street2 = GetStreetNameFromHashKey(street)
-		ESX.ShowAdvancedNotification('Alarm policyjny', '~r~Sprzedaż Narkotyków', street2, "CHAR_CALL911", 1)
+		ESX.ShowAdvancedNotification(Config.notify.police_notify_title, Config.notify.police_notify_subtitle, street2, "CHAR_CALL911", 1)
 		PlaySoundFrontend(-1, "Bomb_Disarmed", "GTAO_Speed_Convoy_Soundset", 0)
 
 		blip = AddBlipForCoord(coords)

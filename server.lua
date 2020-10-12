@@ -35,7 +35,7 @@ RegisterCommand('dealer', function(source, args, rawcommand)
         end
         
         if ESX.Table.SizeOf(Config.drugs) == drugToSell.i and drugToSell.count == 0 then
-            xPlayer.showNotification('Nie posiadasz żadnych dragów', 6)
+            xPlayer.showNotification(Config.notify.nodrugs, 6)
         end
     end
 end, false)
@@ -50,7 +50,6 @@ end)
 RegisterServerEvent('stasiek_selldrugsv2:notifycops')
 AddEventHandler('stasiek_selldrugsv2:notifycops', function(drugToSell)
     TriggerClientEvent('stasiek_selldrugsv2:notifyPolice', -1, drugToSell.coords)
-    TriggerClientEvent("esx_outlawalert:outlawNotify", -1, "^*^110-72 ^r^7Sprzedaż narkotyków przez na " .. drugToSell.zone)
 end)
 
 ESX.RegisterServerCallback('stasiek_selldrugsv2:getPoliceCount', function(source, cb)

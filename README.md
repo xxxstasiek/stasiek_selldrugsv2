@@ -11,6 +11,12 @@ ESX.PlayAnim = function(dict, anim, speed, time, flag)
     end)
 end
 
+ESX.PlayAnimOnPed = function(ped, dict, anim, speed, time, flag)
+	ESX.Streaming.RequestAnimDict(dict, function()
+		TaskPlayAnim(ped, dict, anim, speed, speed, time, flag, 1, false, false, false)
+	end)
+end
+
 ESX.Game.MakeEntityFaceEntity = function(entity1, entity2)
     local p1 = GetEntityCoords(entity1, true)
     local p2 = GetEntityCoords(entity2, true)
