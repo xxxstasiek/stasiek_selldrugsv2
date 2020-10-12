@@ -25,6 +25,7 @@ Config = {
         reject = '~r~This stuff is shitty!',
         vehicle = '~r~You\'ve to leave vehicle to sell',
         sold = '~g~You\'ve sold ~y~x%s of %s ~g~for %s$',
+        client = '~g~Your client ~n~~r~want\'s to buy x%s %s',
         police_notify_title = 'Police dispatch',
         police_notify_subtitle = '~r~Drugs sell',
     },

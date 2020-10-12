@@ -119,7 +119,7 @@ next_ped = function(drugToSell)
 		while npc.ped ~= nil and npc.ped ~= 0 and not IsEntityDead(npc.ped) do
 			Wait(0)
 			npc.coords = GetEntityCoords(npc.ped)
-			ESX.Game.Utils.DrawText3D(npc.coords, '~g~Twój klient ~n~~r~Chce kupić x' .. drugToSell.count .. ' ' .. drugToSell.label, 0.5)
+			ESX.Game.Utils.DrawText3D(npc.coords, (Config.notify.client):format(drugToSell.count, drugToSell.label), 0.5)
 			distance = Vdist2(GetEntityCoords(PlayerPedId()), npc.coords)
 			
 			if distance < 2.0 then
