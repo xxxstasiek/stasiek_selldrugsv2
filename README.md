@@ -1,9 +1,10 @@
 # stasiek_selldrugsv2
-Second version of Fivem selldrugs script<br>
-Only you had to do is translate it ;)<br>
-Fivem infinity have issues with npc spawning, soo your npc-client is spawned nearby<br>
+Second version of Fivem selldrugs script
+Only you had to do is translate it ;)
+Fivem infinity have issues with npc spawning, soo your npc-client is spawned nearby
 
-if you've issues with ESX try adding this two functions to your es_extended/client/functions.lua<br>
+# esx error?
+if you've issues with ESX try adding this two functions to your es_extended/client/functions.lua
 ```
 ESX.PlayAnim = function(dict, anim, speed, time, flag)
     ESX.Streaming.RequestAnimDict(dict, function()
@@ -31,3 +32,6 @@ end
 
 # Demonstration
 [![Watch the video](http://xstasiek.pl/img/stasiek31.png)](http://xstasiek.pl/video/stasiek_selldrugsv2.mp4) <- click me!
+
+# stasiek_selldrugsv1
+https://github.com/xxxstasiek/stasiek_selldrugs
