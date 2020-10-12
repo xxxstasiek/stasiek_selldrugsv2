@@ -24,4 +24,4 @@ end
 ```
 
 # Demonstration
-[![Watch the video](http://xstasiek.pl/img/stasiek128.png)](http://xstasiek.pl/video/stasiek_selldrugsv2.mp4) <- click me!
+[![Watch the video](http://xstasiek.pl/img/stasiek31.png)](http://xstasiek.pl/video/stasiek_selldrugsv2.mp4) <- click me!
