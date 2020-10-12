@@ -83,10 +83,10 @@ next_ped = function(drugToSell)
 		drugToSell.price = ESX.Math.Round(drugToSell.price * 1.30)
 	end
 
-	--TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)
+	TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)
 	ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.searching .. drugToSell.label, 'DIA_CLIFFORD', 1)
 	Wait(math.random(5000, 10000))
-	ESX.PlayAnim('amb@world_human_drug_dealer_hard@male@base', 'base', 8.0, -1, 1)
+	--ESX.PlayAnim('amb@world_human_drug_dealer_hard@male@base', 'base', 8.0, -1, 1)
 
 	npc.hash = GetHashKey(Config.pedlist[math.random(1, #Config.pedlist)])
 	ESX.Streaming.RequestModel(npc.hash)
