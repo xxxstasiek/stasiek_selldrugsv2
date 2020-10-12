@@ -12,9 +12,9 @@ ESX.PlayAnim = function(dict, anim, speed, time, flag)
 end
 
 ESX.PlayAnimOnPed = function(ped, dict, anim, speed, time, flag)
-	ESX.Streaming.RequestAnimDict(dict, function()
-		TaskPlayAnim(ped, dict, anim, speed, speed, time, flag, 1, false, false, false)
-	end)
+    ESX.Streaming.RequestAnimDict(dict, function()
+        TaskPlayAnim(ped, dict, anim, speed, speed, time, flag, 1, false, false, false)
+    end)
 end
 
 ESX.Game.MakeEntityFaceEntity = function(entity1, entity2)
