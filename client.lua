@@ -53,7 +53,7 @@ next_ped = function(drugToSell)
 	end
 
 	cops = 0
-	ESX.TriggerServerEvent('stasiek_selldrugsv2:getPoliceCount', function(_cops)
+	ESX.TriggerServerCallback('stasiek_selldrugsv2:getPoliceCount', function(_cops)
 		cops = _cops
 	end)
 
