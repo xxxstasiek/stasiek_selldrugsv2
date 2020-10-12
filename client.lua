@@ -15,6 +15,7 @@ Citizen.CreateThread(function()
 	end
 
 	PlayerData = ESX.GetPlayerData()
+	ESX.Streaming.RequestStreamedTextureDict('DIA_CLIFFORD')
 
 	ESX.PlayAnim = function(dict, anim, speed, time, flag)
 		ESX.Streaming.RequestAnimDict(dict, function()
