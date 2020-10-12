@@ -128,7 +128,7 @@ next_ped = function(drugToSell)
 						TriggerServerEvent('stasiek_selldrugsv2:notifycops', drugToSell)
 						SetPedAsNoLongerNeeded(npc.ped)
 						if Config.npcFightOnReject then
-							TaskCombatPed(npc.ped, PlayerPedId(), 0, 16) -- Wyłączone bo wkurwia
+							TaskCombatPed(npc.ped, PlayerPedId(), 0, 16)
 						end
 						npc = {}
 						return
