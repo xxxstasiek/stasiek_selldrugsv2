@@ -3,13 +3,12 @@ Config = {
     npcFightOnReject = true,
     drugs = {
         ['weed_pooch'] = 1500,
-        ['weedindica_pooch'] = 2200,
         ['opium_pooch'] = 3100,
         ['coke_pooch'] = 3700,
         ['meth_pooch'] = 3400,
-        ['hera_pooch'] = 2700,
+        --add as much as you want
     },
-    cityPoint = vector3(0.0, -500.0, 100.0), --set to false to disable
+    cityPoint = vector3(0.0, -500.0, 100.0), --set cityPoint to false to disable
     notify = {
         title = 'Drugs',
         nodrugs = 'You don\'t have any drugs to sell',
