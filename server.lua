@@ -44,7 +44,11 @@ RegisterServerEvent('stasiek_selldrugsv2:pay')
 AddEventHandler('stasiek_selldrugsv2:pay', function(drugToSell)
     xPlayer = ESX.GetPlayerFromId(source)
     xPlayer.removeInventoryItem(drugToSell.type, drugToSell.count)
-    xPlayer.addAccountMoney('black_money', drugToSell.price)
+    if Config.account == 'money' then
+        xPlayer.addMoney(drugToSell.price)
+    else
+        xPlayer.addAccountMoney(Config.account, drugToSell.price)
+    end
 end)
 
 RegisterServerEvent('stasiek_selldrugsv2:notifycops')

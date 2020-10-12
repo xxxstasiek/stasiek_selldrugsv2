@@ -1,6 +1,7 @@
 Config = {
     requiredCops = 2,
     npcFightOnReject = true,
+    account = 'black_money', --change to 'money' if you want
     drugs = {
         ['weed_pooch'] = 1500,
         ['opium_pooch'] = 3100,
