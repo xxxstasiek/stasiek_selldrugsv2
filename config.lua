@@ -10,7 +10,7 @@ Config = {
         ['hera_pooch'] = 2700,
     },
     cityPoint = vector3(0.0, -500.0, 100.0), --set to false to disable
-    pedList = {
+    pedlist = {
         'ig_abigail',
         'csb_abigail',
         'u_m_y_abner',
