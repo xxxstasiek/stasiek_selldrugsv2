@@ -59,8 +59,8 @@ end)
 ESX.RegisterServerCallback('stasiek_selldrugsv2:getPoliceCount', function(source, cb)
     count = 0
 
-    for k, v in pairs(ESX.GetPlayers()) do
-        xPlayer = ESX.GetPlayerFromId(v.source)
+    for _, playerId in pairs(ESX.GetPlayers()) do
+        xPlayer = ESX.GetPlayerFromId(playerId)
         if xPlayer.job.name == 'police' then
             count = count + 1
         end
