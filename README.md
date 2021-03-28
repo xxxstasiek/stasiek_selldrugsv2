@@ -31,7 +31,7 @@ end
 ```
 
 # Demonstration
-[![Watch the video](http://xstasiek.pl/img/stasiek31.png)](http://xstasiek.pl/video/stasiek_selldrugsv2.mp4) <- click me!
+[![Watch the video](http://xstasiek.pl/img/stasiek31.png)](https://youtu.be/lwCv3NeQZCo) <- click me!
 
 # stasiek_selldrugsv1
 https://github.com/xxxstasiek/stasiek_selldrugs
