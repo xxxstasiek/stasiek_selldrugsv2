@@ -87,7 +87,7 @@ next_ped = function(drugToSell)
 	ESX.ShowAdvancedNotification(Config.notify.title, '', Config.notify.searching .. drugToSell.label, 'DIA_CLIFFORD', 1)
 	Wait(math.random(5000, 10000))
 	--ESX.PlayAnim('amb@world_human_drug_dealer_hard@male@base', 'base', 8.0, -1, 1)
-
+        ClearPedTasks(PlayerPedId()) 
 	npc.hash = GetHashKey(Config.pedlist[math.random(1, #Config.pedlist)])
 	ESX.Streaming.RequestModel(npc.hash)
 	npc.coords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 50.0, 5.0)
